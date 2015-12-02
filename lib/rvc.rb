@@ -1,5 +1,4 @@
-
-$:.push(File.dirname(__FILE__))
+$LOAD_PATH.push(File.dirname(__FILE__))
 
 require 'fileutils'
 require 'digest/sha1'
@@ -21,7 +20,7 @@ class Rvc
   class << self
     attr_accessor :cli
   end
-  
+
   def self.go(args)
     @cli = Rvc::CLI.new(args)
     @cli.execute

@@ -1,5 +1,5 @@
 
-require 'lib/rvc'
+require './lib/rvc'
 
 def test_repo1_dir
   File.dirname(__FILE__) + "/fixtures/test-repo1"
@@ -20,7 +20,7 @@ RSpec.configure do |config|
   config.before(:each) do
     restore_test_repo1
   end
-  
+
   config.after(:each) do
     restore_test_repo1
   end
