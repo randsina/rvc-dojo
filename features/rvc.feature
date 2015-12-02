@@ -13,7 +13,7 @@ Feature: Ruby Version Control
     When I run rvc init
     And I run rvc log
     And the output should contain "No commits."
-    
+
   Scenario: Commit should print usage if the arguments are wrong
     Given a file named "test_repo/example.rb" with:
       """
@@ -24,7 +24,7 @@ Feature: Ruby Version Control
     Then the output should contain exactly:
       """
       usage: rvc commit USERNAME MESSAGE
-      
+
       """
 
   Scenario: Commit should create a commit in the log
@@ -91,18 +91,5 @@ Feature: Ruby Version Control
     Then the output should contain exactly:
       """
       puts "hello world"
-      
+
       """
-    
-
-
-
-
-
-
-
-
-
-
-
-
