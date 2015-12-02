@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Rvc::CLI' do
   it 'should accept arguments' do
     cli = Rvc::CLI.new(['init', 1, 2])
@@ -16,7 +14,7 @@ describe 'Rvc::CLI' do
 
   it 'should raise an error for an unknown command' do
     lambda do
-      cli = Rvc::CLI.new([:xxx, 1, 2])
+      Rvc::CLI.new([:xxx, 1, 2])
     end.should raise_error(RuntimeError, 'Unknown command xxx.')
   end
 

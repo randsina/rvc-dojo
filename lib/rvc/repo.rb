@@ -59,13 +59,13 @@ class Rvc
         nil
       else
         tree.contents.each do |type, sha, name|
-          if name == bits[0]
-            if type == 'tree'
-              tree = object(sha)
-              return blob_at_path(tree, bits[1..-1].join('/'))
-            else
-              fail 'looking for file inside of a file'
-            end
+          next unless name == bits[0]
+
+          if type == 'tree'
+            tree = object(sha)
+            return blob_at_path(tree, bits[1..-1].join('/'))
+          else
+            fail 'looking for file inside of a file'
           end
         end
         nil

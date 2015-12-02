@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Rvc::Log' do
   def log
     Rvc::Log.new(Rvc::Repo.new(test_repo1_dir))

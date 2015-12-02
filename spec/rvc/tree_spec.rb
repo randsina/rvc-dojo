@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Rvc::Tree' do
   it 'should initialize with a list of type, sha, name tuples' do
     contents = [%w(tree 123 lib), %w(blob 4589 README)]

@@ -16,11 +16,11 @@ def restore_test_repo1
 end
 
 RSpec.configure do |config|
-  config.before(:each) do
-    restore_test_repo1
+  [:before, :after].each do |method|
+    config.send(method, :each) { restore_test_repo1 }
   end
 
-  config.after(:each) do
-    restore_test_repo1
+  [:mock, :expect].each do |method|
+    config.send("#{method}_with", :rspec) { |c| c.syntax = [:should, :expect] }
   end
 end

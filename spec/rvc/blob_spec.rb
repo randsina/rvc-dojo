@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Rvc::Blob' do
   it 'should initialize with contents' do
     contents = 'FAFASD'

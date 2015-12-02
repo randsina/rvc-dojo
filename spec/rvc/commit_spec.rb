@@ -1,14 +1,12 @@
-require 'spec_helper'
-
 describe 'Rvc::Commit' do
   it 'should initialize with a parent, username, message, tree sha and timestamp' do
     t = Time.now
     commit = Rvc::Commit.new('123', 'dan', 'asdf', 'tree1', t)
-    commit.parent_sha.should == '123'
-    commit.username.should == 'dan'
-    commit.message.should == 'asdf'
-    commit.tree_sha.should == 'tree1'
-    commit.created_at.should == t
+    expect(commit.parent_sha).to eq('123')
+    expect(commit.username).to eq('dan')
+    expect(commit.message).to eq('asdf')
+    expect(commit.tree_sha).to eq('tree1')
+    expect(commit.created_at).to eq(t)
   end
 
   describe 'from_data' do
@@ -16,10 +14,10 @@ describe 'Rvc::Commit' do
       t = Time.now - 1000
       c = Rvc::Commit.from_data(Rvc::Commit.new(nil, 'dan', 'asdf', 'tree1', t).to_data)
       c.parent_sha.should be_nil
-      c.username.should == 'dan'
-      c.message.should == 'asdf'
-      c.tree_sha.should == 'tree1'
-      c.created_at.to_s.should == t.to_s
+      expect(c.username).to eq('dan')
+      expect(c.message).to eq('asdf')
+      expect(c.tree_sha).to eq('tree1')
+      expect(c.created_at.to_s).to eq(t.to_s)
     end
   end
 end

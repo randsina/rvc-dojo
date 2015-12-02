@@ -9,7 +9,7 @@ class Rvc
       if current = @repo.head
         log_lines = []
         while current
-          log_lines << current.to_sha + '  ' + current.created_at.to_s + '  ' + current.username.rjust(10, ' ') + '  ' + current.message
+          log_lines << "#{current.to_sha} #{current.created_at} #{current.username} #{current.message}"
           current = @repo.read_object(current.parent_sha)
         end
         log_lines.join("\n")

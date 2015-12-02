@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Rvc::Repo' do
   it 'should be invalid without a valid directory' do
     lambda do
