@@ -54,7 +54,7 @@ describe 'Rvc::CLI' do
   describe 'commit command' do
     before do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(['commit', 'dan', 'First commit'])
+        @cli = Rvc::CLI.new(['commit', 'randsina', 'First commit'])
       end
     end
 
@@ -66,13 +66,13 @@ describe 'Rvc::CLI' do
 
     it 'should extract arguments and pass on to the repo commit' do
       @cli.repo.init
-      @cli.repo.should_receive(:commit).with('dan', 'First commit')
+      @cli.repo.should_receive(:commit).with('randsina', 'First commit')
       @cli.commit
     end
 
     it 'should print usage if the wrong number of args are given' do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(%w(commit dan))
+        @cli = Rvc::CLI.new(%w(commit randsina))
       end
       @cli.repo.init
       @cli.commit.should == 'usage: rvc commit USERNAME MESSAGE'

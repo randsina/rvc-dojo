@@ -49,7 +49,7 @@ describe 'Rvc::Repo' do
 
     describe 'after the first commit' do
       before do
-        test_repo1.commit('dan', 'Initial commit.')
+        test_repo1.commit('randsina', 'Initial commit.')
       end
 
       it 'the head should exist' do
@@ -63,8 +63,8 @@ describe 'Rvc::Repo' do
 
     describe 'after the 2nd commit' do
       before do
-        test_repo1.commit('dan', 'Initial commit.')
-        test_repo1.commit('dan', '2nd commit')
+        test_repo1.commit('randsina', 'Initial commit.')
+        test_repo1.commit('randsina', '2nd commit')
       end
 
       it 'the head should exist' do
@@ -81,10 +81,10 @@ describe 'Rvc::Repo' do
   context 'repo with commits with added file' do
     before do
       test_repo1.init
-      test_repo1.commit('dan', 'Initial commit.')
+      test_repo1.commit('randsina', 'Initial commit.')
       FileUtils.touch(test_repo1_dir + '/newfile.txt')
       File.open(test_repo1_dir + '/dir1/baz.rb', 'w') { |f| f.print 'STOLE YOUR CODE' }
-      test_repo1.commit('dan', '2nd commit')
+      test_repo1.commit('randsina', '2nd commit')
     end
 
     describe 'checking out an earlier release' do

@@ -33,7 +33,7 @@ Feature: Ruby Version Control
       puts "hello world"
       """
     When I run rvc init
-    And I run rvc commit dan "Hello world implemented."
+    And I run rvc commit randsina "Hello world implemented."
     And I run rvc log
     Then the output should contain:
       """
@@ -46,13 +46,13 @@ Feature: Ruby Version Control
       puts "hello world"
       """
     When I run rvc init
-    And I run rvc commit dan "Initial commit."
+    And I run rvc commit randsina "Initial commit."
     Given a file named "test_repo/example.rb" with:
       """
       puts "hello world"
       YOYOYO
       """
-    And I run rvc commit dan "Modified."
+    And I run rvc commit randsina "Modified."
     And I run rvc checkout HEAD^
     And the file "test_repo/example.rb" should not contain "YOYOYO"
 
@@ -62,13 +62,13 @@ Feature: Ruby Version Control
       puts "hello world"
       """
     When I run rvc init
-    And I run rvc commit dan "Initial commit."
+    And I run rvc commit randsina "Initial commit."
     Given a file named "test_repo/example.rb" with:
       """
       puts "hello world"
       YOYOYO
       """
-    And I run rvc commit dan "Modified."
+    And I run rvc commit randsina "Modified."
     And I run rvc checkout HEAD^
     And the file "test_repo/example.rb" should not contain "YOYOYO"
     And I run rvc checkout HEAD
@@ -80,13 +80,13 @@ Feature: Ruby Version Control
       puts "hello world"
       """
     When I run rvc init
-    And I run rvc commit dan "Initial commit."
+    And I run rvc commit randsina "Initial commit."
     Given a file named "test_repo/example.rb" with:
       """
       puts "hello world"
       YOYOYO
       """
-    And I run rvc commit dan "2nd commit."
+    And I run rvc commit randsina "2nd commit."
     And I run rvc show HEAD^:test_repo/example.rb
     Then the output should contain exactly:
       """
