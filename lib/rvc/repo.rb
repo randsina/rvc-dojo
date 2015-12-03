@@ -4,8 +4,8 @@ class Rvc
 
     def initialize(path)
       @path = File.expand_path(path)
-      fail "Directory doesn't exist." unless File.exist?(@path)
-      fail 'Repo needs a directory, not a file.' unless File.directory?(@path)
+      fail "Directory doesn't exist.".colorize(:red) unless File.exist?(@path)
+      fail 'Repo needs a directory, not a file.'.colorize(:red) unless File.directory?(@path)
     end
 
     def initialized?
@@ -65,7 +65,7 @@ class Rvc
             tree = object(sha)
             return blob_at_path(tree, bits[1..-1].join('/'))
           else
-            fail 'looking for file inside of a file'
+            fail 'looking for file inside of a file'.colorize(:red)
           end
         end
         nil

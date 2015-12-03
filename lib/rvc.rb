@@ -6,6 +6,7 @@ require 'zlib'
 
 require 'rubygems'
 require 'differ'
+require 'colorize'
 
 require 'rvc/blob'
 require 'rvc/commit'

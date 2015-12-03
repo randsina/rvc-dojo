@@ -20,7 +20,7 @@ class Rvc
     end
 
     def fail_unless_repo
-      fail 'Not an RVC repository.' unless @repo.initialized?
+      fail 'Not an RVC repository.'.colorize(:red) unless @repo.initialized?
     end
 
     def init
@@ -35,17 +35,17 @@ class Rvc
 
     def commit
       fail_unless_repo
-      return 'usage: rvc commit USERNAME MESSAGE' unless args.length == 2
+      return 'usage: rvc commit USERNAME MESSAGE'.colorize(:yellow) unless args.length == 2
       repo.commit(args[0], args[1])
     end
 
     def checkout
       fail_unless_repo
-      return 'usage: rvc checkout COMMIT' unless args.length == 1
+      return 'usage: rvc checkout COMMIT'.colorize(:yellow) unless args.length == 1
 
       commit = commit_from_id(args[0])
       @repo.checkout(commit)
-      "Checked out \"#{commit.message}\" by #{commit.username}"
+      "Checked out \"#{commit.message.colorize(:green)}\" by #{commit.username.colorize(:blue)}"
     end
 
     def commit_from_id(commit_id)
@@ -57,7 +57,7 @@ class Rvc
         commit = @repo.head
         ups.times do
           commit = @repo.object(commit.parent_sha)
-          fail "unknown commit #{commit_id}" unless commit
+          fail "unknown commit #{commit_id}".colorize(:red) unless commit
         end
         commit
       end
@@ -66,19 +66,19 @@ class Rvc
     def show
       fail_unless_repo
       unless args.length == 1 && args[0].split(':').length == 2 # checkout && and
-        return 'usage: rvc show COMMIT:PATH'
+        return 'usage: rvc show COMMIT:PATH'.colorize(:yellow)
       end
       commit_id, path = *args[0].split(':')
       commit = commit_from_id(commit_id)
       tree = @repo.object(commit.tree_sha)
       blob = @repo.blob_at_path(tree, path)
-      blob ? blob.contents : "Can't find blob #{path}."
+      blob ? blob.contents : "Can't find blob #{path}.".colorize(:red)
     end
 
     private
 
     def validate_command
-      fail "Unknown command #{@command}." unless COMMANDS.include?(@command)
+      fail "Unknown command #{@command}.".colorize(:red) unless COMMANDS.include?(@command)
     end
   end
 end
