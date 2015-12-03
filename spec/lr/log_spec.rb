@@ -8,10 +8,10 @@ describe 'Lr::Log' do
   end
 
   it 'should be invalid without a Repo' do
-    -> { Lr::Log.new(1) }.should raise_error(RuntimeError, 'Log needs a Repo')
+    -> { Lr::Log.new(1) }.should raise_error(RuntimeError, 'Log needs a Repo'.colorize(:red))
   end
 
   it 'should return an empty log for an uninitialized repo' do
-    log.to_s.should == 'No commits.'
+    log.to_s.should == 'No commits.'.colorize(:green)
   end
 end
