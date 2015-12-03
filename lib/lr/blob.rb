@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class Blob
     def self.from_data(contents)
       new(contents)

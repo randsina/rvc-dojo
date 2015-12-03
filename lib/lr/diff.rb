@@ -1,6 +1,6 @@
 require 'tempfile'
 
-class Rvc
+class Lr
   class Diff
     def diff(str1, str2)
       `diff #{file_for(str1)} #{file_for(str2)}`

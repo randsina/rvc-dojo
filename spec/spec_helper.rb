@@ -1,11 +1,11 @@
-require './lib/rvc'
+require './lib/lr'
 
 def test_repo1_dir
   File.dirname(__FILE__) + '/fixtures/test-repo1'
 end
 
 def test_repo1
-  Rvc::Repo.new(test_repo1_dir)
+  Lr::Repo.new(test_repo1_dir)
 end
 
 def restore_test_repo1

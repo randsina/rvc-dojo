@@ -8,22 +8,22 @@ require 'rubygems'
 require 'differ'
 require 'colorize'
 
-require 'rvc/blob'
-require 'rvc/commit'
-require 'rvc/tree'
+require 'lr/blob'
+require 'lr/commit'
+require 'lr/tree'
 
-require 'rvc/cli'
-require 'rvc/diff'
-require 'rvc/log'
-require 'rvc/repo'
+require 'lr/cli'
+require 'lr/diff'
+require 'lr/log'
+require 'lr/repo'
 
-class Rvc
+class Lr
   class << self
     attr_accessor :cli
   end
 
   def self.go(args)
-    @cli = Rvc::CLI.new(args)
+    @cli = Lr::CLI.new(args)
     @cli.execute
   end
 end

@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class Commit
     def self.from_data(data)
       parent_sha, tree_sha, username, message, created_at = *data.split('/')

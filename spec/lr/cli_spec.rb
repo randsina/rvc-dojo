@@ -1,27 +1,27 @@
-describe 'Rvc::CLI' do
+describe 'Lr::CLI' do
   it 'should accept arguments' do
-    cli = Rvc::CLI.new(['init', 1, 2])
+    cli = Lr::CLI.new(['init', 1, 2])
     cli.args.should == [1, 2]
     cli.command.should == 'init'
   end
 
   it 'should set the current working directory' do
     FileUtils.cd(test_repo1_dir) do
-      cli = Rvc::CLI.new(['init'])
+      cli = Lr::CLI.new(['init'])
       cli.cwd.should == test_repo1_dir
     end
   end
 
   it 'should raise an error for an unknown command' do
     lambda do
-      Rvc::CLI.new([:xxx, 1, 2])
+      Lr::CLI.new([:xxx, 1, 2])
     end.should raise_error(RuntimeError, 'Unknown command xxx.')
   end
 
   describe 'init command' do
     before do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(['log'])
+        @cli = Lr::CLI.new(['log'])
       end
     end
 
@@ -34,14 +34,14 @@ describe 'Rvc::CLI' do
   describe 'log command' do
     before do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(['log'])
+        @cli = Lr::CLI.new(['log'])
       end
     end
 
     it 'should fail if this is not a repo' do
       lambda do
         @cli.log
-      end.should raise_error(RuntimeError, 'Not an RVC repository.')
+      end.should raise_error(RuntimeError, 'Not an LR repository.')
     end
 
     it 'should forward onto the log class if it is a repo' do
@@ -54,14 +54,14 @@ describe 'Rvc::CLI' do
   describe 'commit command' do
     before do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(['commit', 'randsina', 'First commit'])
+        @cli = Lr::CLI.new(['commit', 'randsina', 'First commit'])
       end
     end
 
     it 'should fail if this is not a repo' do
       lambda do
         @cli.commit
-      end.should raise_error(RuntimeError, 'Not an RVC repository.')
+      end.should raise_error(RuntimeError, 'Not an LR repository.')
     end
 
     it 'should extract arguments and pass on to the repo commit' do
@@ -72,10 +72,10 @@ describe 'Rvc::CLI' do
 
     it 'should print usage if the wrong number of args are given' do
       FileUtils.cd(test_repo1_dir) do
-        @cli = Rvc::CLI.new(%w(commit randsina))
+        @cli = Lr::CLI.new(%w(commit randsina))
       end
       @cli.repo.init
-      @cli.commit.should == 'usage: rvc commit USERNAME MESSAGE'
+      @cli.commit.should == 'usage: lr commit USERNAME MESSAGE'
     end
   end
 end

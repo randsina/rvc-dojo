@@ -1,19 +1,19 @@
-describe 'Rvc::Repo' do
+describe 'Lr::Repo' do
   it 'should be invalid without a valid directory' do
     lambda do
-      Rvc::Repo.new('/asdfasdfasdf/asdfjioag/asdf')
+      Lr::Repo.new('/asdfasdfasdf/asdfjioag/asdf')
     end.should raise_error(RuntimeError, "Directory doesn't exist.")
   end
 
   it 'should be invalid if given a file' do
     lambda do
-      Rvc::Repo.new(test_repo1_dir + '/foo.rb')
+      Lr::Repo.new(test_repo1_dir + '/foo.rb')
     end.should raise_error(RuntimeError, 'Repo needs a directory, not a file.')
   end
 
   it 'should be valid with a valid directory' do
     lambda do
-      Rvc::Repo.new(test_repo1_dir)
+      Lr::Repo.new(test_repo1_dir)
     end.should_not raise_error
   end
 

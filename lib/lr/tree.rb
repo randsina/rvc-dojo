@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class Tree
     def self.from_data(data)
       lines = data.split("\n")

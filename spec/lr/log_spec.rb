@@ -1,14 +1,14 @@
-describe 'Rvc::Log' do
+describe 'Lr::Log' do
   def log
-    Rvc::Log.new(Rvc::Repo.new(test_repo1_dir))
+    Lr::Log.new(Lr::Repo.new(test_repo1_dir))
   end
 
   it 'should be valid with a Repo' do
-    Rvc::Log.new(Rvc::Repo.new(test_repo1_dir))
+    Lr::Log.new(Lr::Repo.new(test_repo1_dir))
   end
 
   it 'should be invalid without a Repo' do
-    -> { Rvc::Log.new(1) }.should raise_error(RuntimeError, 'Log needs a Repo')
+    -> { Lr::Log.new(1) }.should raise_error(RuntimeError, 'Log needs a Repo')
   end
 
   it 'should return an empty log for an uninitialized repo' do

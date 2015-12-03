@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class CLI
     attr_reader :args, :cwd, :repo, :command
 
@@ -11,7 +11,7 @@ class Rvc
       @cwd = Dir.pwd
       @command = args.shift
       validate_command
-      @repo = Rvc::Repo.new(@cwd)
+      @repo = Lr::Repo.new(@cwd)
     end
 
     def execute
@@ -20,7 +20,7 @@ class Rvc
     end
 
     def fail_unless_repo
-      fail 'Not an RVC repository.'.colorize(:red) unless @repo.initialized?
+      fail 'Not a LR repository.'.colorize(:red) unless @repo.initialized?
     end
 
     def init
@@ -35,13 +35,13 @@ class Rvc
 
     def commit
       fail_unless_repo
-      return 'usage: rvc commit USERNAME MESSAGE'.colorize(:yellow) unless args.length == 2
+      return 'usage: lr commit USERNAME MESSAGE'.colorize(:yellow) unless args.length == 2
       repo.commit(args[0], args[1])
     end
 
     def checkout
       fail_unless_repo
-      return 'usage: rvc checkout COMMIT'.colorize(:yellow) unless args.length == 1
+      return 'usage: lr checkout COMMIT'.colorize(:yellow) unless args.length == 1
 
       commit = commit_from_id(args[0])
       @repo.checkout(commit)
@@ -66,7 +66,7 @@ class Rvc
     def show
       fail_unless_repo
       unless args.length == 1 && args[0].split(':').length == 2 # checkout && and
-        return 'usage: rvc show COMMIT:PATH'.colorize(:yellow)
+        return 'usage: lr show COMMIT:PATH'.colorize(:yellow)
       end
       commit_id, path = *args[0].split(':')
       commit = commit_from_id(commit_id)

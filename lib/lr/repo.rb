@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class Repo
     attr_reader :path
 
@@ -9,11 +9,11 @@ class Rvc
     end
 
     def initialized?
-      rvc_dir_exists?
+      lr_dir_exists?
     end
 
     def init
-      FileUtils.mkdir(rvc_dir) unless rvc_dir_exists?
+      FileUtils.mkdir(lr_dir) unless lr_dir_exists?
     end
 
     def commit(username, message)
@@ -24,7 +24,7 @@ class Rvc
     end
 
     def log
-      @log ||= Rvc::Log.new(self)
+      @log ||= Lr::Log.new(self)
     end
 
     def checkout(commit)
@@ -139,7 +139,7 @@ class Rvc
 
     def clear_working_dir
       Dir[path + '/*'].each do |subpath|
-        FileUtils.rm_rf(subpath) unless File.basename(subpath) == '.rvc'
+        FileUtils.rm_rf(subpath) unless File.basename(subpath) == '.lr'
       end
     end
 
@@ -163,19 +163,19 @@ class Rvc
     end
 
     def head_path
-      rvc_dir + '/HEAD'
+      lr_dir + '/HEAD'
     end
 
-    def rvc_dir_exists?
-      File.exist?(rvc_dir)
+    def lr_dir_exists?
+      File.exist?(lr_dir)
     end
 
-    def rvc_dir
-      @path + '/.rvc'
+    def lr_dir
+      @path + '/.lr'
     end
 
     def objects_dir
-      rvc_dir + '/objects'
+      lr_dir + '/objects'
     end
 
     def ensure_objects_dir

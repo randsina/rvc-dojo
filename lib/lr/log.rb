@@ -1,4 +1,4 @@
-class Rvc
+class Lr
   class Log
     def initialize(repo)
       @repo = repo
