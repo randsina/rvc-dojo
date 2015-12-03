@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+# puts File.expand_path(__FILE__)
+# puts File.dirname(__FILE__)
+# TODO: expand_path and dirname
+require File.dirname(__FILE__) + '/../lib/lr'
+Lr.go(ARGV)

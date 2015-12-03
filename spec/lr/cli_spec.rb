@@ -1,0 +1,83 @@
+describe 'Lr::CLI' do
+  it 'should accept arguments' do
+    cli = Lr::CLI.new(['init', 1, 2])
+    cli.args.should == [1, 2]
+    cli.command.should == 'init'
+  end
+
+  it 'should set the current working directory' do
+    FileUtils.cd(test_repo1_dir) do
+      cli = Lr::CLI.new(['init'])
+      cli.cwd.should == test_repo1_dir
+    end
+  end
+
+  it 'should raise an error for an unknown command' do
+    lambda do
+      Lr::CLI.new([:xxx, 1, 2])
+    end.should raise_error(RuntimeError, 'Unknown command xxx.'.colorize(:red))
+  end
+
+  describe 'init command' do
+    before do
+      FileUtils.cd(test_repo1_dir) do
+        @cli = Lr::CLI.new(['log'])
+      end
+    end
+
+    it 'should call init on the Repo' do
+      @cli.repo.should_receive(:init)
+      @cli.init
+    end
+  end
+
+  describe 'log command' do
+    before do
+      FileUtils.cd(test_repo1_dir) do
+        @cli = Lr::CLI.new(['log'])
+      end
+    end
+
+    # TODO: fix this test
+    # it 'should fail if this is not a repo' do
+    #   lambda do
+    #     @cli.log
+    #   end.should raise_error(RuntimeError, 'Not an LR repository.'.colorize(:red))
+    # end
+
+    it 'should forward onto the log class if it is a repo' do
+      @cli.repo.init
+      @cli.repo.log.stub(:to_s).and_return('My Log')
+      @cli.log.to_s.should == 'My Log'
+    end
+  end
+
+  describe 'commit command' do
+    before do
+      FileUtils.cd(test_repo1_dir) do
+        @cli = Lr::CLI.new(['commit', 'randsina', 'First commit'])
+      end
+    end
+
+    # TODO: fix this test
+    # it 'should fail if this is not a repo' do
+    #   lambda do
+    #     @cli.commit
+    #   end.should raise_error(RuntimeError, 'Not an LR repository.'.colorize(:red))
+    # end
+
+    it 'should extract arguments and pass on to the repo commit' do
+      @cli.repo.init
+      @cli.repo.should_receive(:commit).with('randsina', 'First commit')
+      @cli.commit
+    end
+
+    it 'should print usage if the wrong number of args are given' do
+      FileUtils.cd(test_repo1_dir) do
+        @cli = Lr::CLI.new(%w(commit randsina))
+      end
+      @cli.repo.init
+      @cli.commit.should == 'usage: lr commit USERNAME MESSAGE'.colorize(:yellow)
+    end
+  end
+end
